@@ -1,34 +1,18 @@
-import React, { useState } from 'react';
-import {Button, StyleSheet, Text, View, TextInput, Alert } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import ListTasks from './screens/list-tasks/list-tasks';
 
-export default function App() {
-  const [taskName, SetTaskName] = useState("");
-  const [taskDate, SetTaskDate] = useState("");
-  const createTask = async ()=>{
-    try{
-      const response = await fetch('http://192.168.1.2:3000/api/addtask',{
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-type': 'application/json'
-        },
-        body: JSON.stringify({
-          task: taskName,
-          date: taskDate
-        })
-      });
-      const json = await response.json();
-      Alert.alert("Tarea Creada");
-    }catch(error){
-      console.log(error);
-    }
-  }
+const Stack = createStackNavigator();
+
+function App() {
   return (
-    <View style={styles.container}>
-      <TextInput placeholder="Enter task" onChangeText={text=>SetTaskName(text)}/>
-      <TextInput placeholder="Enter date" onChangeText={text=>SetTaskDate(text)}/>
-      <Button title="Create Task" onPress={createTask}></Button>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={ListTasks} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
@@ -40,3 +24,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default App;
