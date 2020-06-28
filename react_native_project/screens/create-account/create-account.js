@@ -4,8 +4,7 @@ import { Container, Button, H1, Input, Form, Item, Toast} from 'native-base'
 import {useNavigation} from '@react-navigation/native'
 import globalStyles from '../../styles/global';
 
-
-const Login =() => {
+function CreateAccount({ navigation }) {
 
   //React navigation
 
@@ -16,20 +15,17 @@ const Login =() => {
         <H1 style={globalStyles.titulo}>moviles</H1>
         <Form>
           <Item inlineLabel last style={globalStyles.input} >
-            <Input placeholder="Email"/>
+            <Input placeholder="Email2"/>
           </Item>
           <Item inlineLabel last style={globalStyles.input}>
-            <Input secureTextEntry={true} placeholder="Password"/>
+            <Input secureTextEntry={true} placeholder="Password2"/>
           </Item>
         </Form>
         <Button square block style={globalStyles.boton}>
-          <Text onPress={ () => navigation.navigate()} style={globalStyles.botonTexto}>Iniciar Sesión</Text>
+          <Text onPress={ () => navigation.navigate(CrearCuenta)} style={globalStyles.botonTexto}>Iniciar Sesión</Text>
         </Button>
         <Text style={globalStyles.enlace}>Crear Cuenta</Text>
       </View>
     </Container>
   );
 }
-
-
-export default Login;
