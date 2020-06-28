@@ -10,13 +10,13 @@ class Login extends Component {
   constructor(props){
     super(props);
     this.state={
-      username : ''
+      useremail : ''
     }
   }
 
   navigate = async (param) => {
     let userLogin = {
-      user : this.state.username,
+      user : this.state.useremail,
       perm : true
     }
     AsyncStorage.setItem('userLogin',JSON.stringify(userLogin))
@@ -36,7 +36,7 @@ class Login extends Component {
                     <Body style={styles.loginBody}>
                       <Item>
                         <MaterialIcons active name='email' size={ data.sizeInputIcon } />
-                        <Input placeholder='Correo' onChangeText={(username) => this.setState({username})}/>
+                        <Input placeholder='Correo' onChangeText={(useremail) => this.setState({useremail})}/>
                       </Item>
                       <Item>
                         <Entypo active name='lock' size={ data.sizeInputIcon } />

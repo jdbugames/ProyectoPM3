@@ -12,7 +12,7 @@ class Home extends Component {
   constructor(props){
     super(props);
     this.state = {
-      username : '',
+      useremail : '',
       perm : 0,
       data : '',
       loading : true
@@ -22,7 +22,7 @@ class Home extends Component {
   async componentDidMount(){
     let userLogin = await AsyncStorage.getItem('userLogin')
     userLogin = JSON.parse(userLogin)
-    this.setState({ username : userLogin.user, perm : userLogin.perm })
+    this.setState({ useremail : userLogin.user, perm : userLogin.perm })
 
     let movies = await API.getData()
     this.setState({ data : movies.data.movies, loading : false })
