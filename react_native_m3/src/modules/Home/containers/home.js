@@ -1,62 +1,48 @@
-import React, {Component} from 'react'
-import {AsyncStorage, FlatList} from 'react-native'
-import { createAppContainer} from 'react-navigation'
-import { createDrawerNavigator } from 'react-navigation-drawer';
-import {Spinner} from 'native-base'
-import Home2 from '../containers/home2'
-import API from '../../../utils/api'
-import HomeLayout from '../components/homeLayout'
+import React, { Component } from 'react';
+import { Text} from 'native-base';
+import {Button, View, TextInput, Keyboard, KeyboardAvoidingView, AsyncStorage, TouchableWithoutFeedback, ImageBackground} from 'react-native'
+import { FontAwesome, MaterialIcons, Entypo } from '@expo/vector-icons';
+import styles from '../../../utils/styles'
+import data from '../../../utils/dataGlobal'
 
 class Home extends Component {
 
   constructor(props){
     super(props);
-    this.state = {
-      useremail : '',
-      perm : 0,
-      data : '',
-      loading : true
+    this.state={
+      useremail : ''
     }
   }
 
-  async componentDidMount(){
-    let userLogin = await AsyncStorage.getItem('userLogin')
-    userLogin = JSON.parse(userLogin)
-    this.setState({ useremail : userLogin.user, perm : userLogin.perm })
+ /*  async componentDidMount(){
+    let valLog = await api.valLogin("Juan", "1234")
+    console.log(valLog)
+  } */
 
-    let movies = await API.getData()
-    this.setState({ data : movies.data.movies, loading : false })
-
+  navigate = async (param) => {
+/*     let userLogin = {
+      user : this.state.useremail,
+      perm : true
+    }
+    AsyncStorage.setItem('userLogin',JSON.stringify(userLogin)) */
+    this.props.navigation.navigate(param)
   }
 
-  render(){
-
-    return(
-      <FlatList
-        data={this.state.data}
-        keyExtractor={(x, i) => i.toString()}
-        ListFooterComponent={() => this.state.loading ? <Spinner /> : null }
-        renderItem={({ item }) => 
-            <HomeLayout datos={item} />
-        }
-      />
-    )
-
+  render() {
+    return (
+      <View  style={styles.headerContent}>
+        <ImageBackground source={require('./../../../../assets/home-background.jpg')} style={styles.homeBackgroundImage}>
+        <View style={styles.homeButtons}>
+          <Button title="GALERIA" onPress={() => this.navigate('Gallery')} />
+        </View>
+        <View style={styles.homeButtons}>
+          <Button title="REGISTRARSE" onPress={() => this.navigate('Register')} />
+        </View>
+        </ImageBackground>
+      </View>
+      
+    );
   }
-
 }
 
-const drawer = createDrawerNavigator({
-  Home,
-  Home2
-},{
-  drawerPosition : 'right',
-  drawerBackgroundColor : '#00d2b3',
-  drawerWidth : 150,
-  contentOptions : {
-    activeTintColor : 'white',
-    inactiveTintColor : 'gray',
-  }
-})
-
-export default createAppContainer(drawer)
+export default Home

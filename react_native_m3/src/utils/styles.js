@@ -41,12 +41,26 @@ const styles = StyleSheet.create({
     },
     totalScreen : {
       width : '100%', 
-      height : '100%'
+      height : '100%',
     },
     spinner : {
       width : 200,
       height : 150
+    },
+    homeButtons : {
+      padding: 80,
+      marginTop : 100,
+      flex: 1,
+
+
+    },
+    homeBackgroundImage : {
+        flex: 1,
+        width: null,
+        height: null,
+        resizeMode: 'cover'
     }
+
 })
 
 export default styles

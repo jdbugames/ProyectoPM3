@@ -4,6 +4,7 @@ import { KeyboardAvoidingView, AsyncStorage} from 'react-native'
 import { FontAwesome, MaterialIcons, Entypo } from '@expo/vector-icons';
 import styles from '../../../utils/styles'
 import data from '../../../utils/dataGlobal'
+import api from '../../../utils/api'
 
 class Login extends Component {
 
@@ -13,6 +14,11 @@ class Login extends Component {
       useremail : ''
     }
   }
+
+ /*  async componentDidMount(){
+    let valLog = await api.valLogin("Juan", "1234")
+    console.log(valLog)
+  } */
 
   navigate = async (param) => {
     let userLogin = {
@@ -48,7 +54,7 @@ class Login extends Component {
                       <Button bordered onPress={() => this.navigate('Register')}>
                         <Text>Registro</Text>
                       </Button>
-                      <Button bordered success style={styles.loginBoton} onPress={() => this.navigate('Profile')}>
+                      <Button bordered success style={styles.loginBoton} onPress={() => this.navigate('Loading')}>
                         <Text>Entrar</Text>
                       </Button>
                   </CardItem>

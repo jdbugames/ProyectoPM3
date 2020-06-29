@@ -12,7 +12,7 @@ class Loading extends Component {
             if(validationLogin){
                 validationLogin = JSON.parse(validationLogin)
                 if(validationLogin.perm) { 
-                    this.props.navigation.navigate('Home')
+                    this.props.navigation.navigate('Profile')
                 }else{
                     this.props.navigation.navigate('UserLogin')
                 }
@@ -28,7 +28,7 @@ class Loading extends Component {
             
             <ImageBackground source={require("../../../../assets/pit2.jpg")} style={styles.totalScreen}>
                 <View style={styles.container}>
-                    <Spinner color='red' style={styles.spinner} />
+                    <Spinner color='green' style={styles.spinner} />
                 </View>
             </ImageBackground>
         )
