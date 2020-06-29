@@ -6,16 +6,49 @@ const styles = StyleSheet.create({
       justifyContent : 'center',
       alignItems : 'center',
     },
+    formContainer : {
+      flex : 1,
+      backgroundColor: "#F5FCFF",
+      marginTop: 30,
+      paddingLeft: 15,
+      paddingRight: 15
+    },
+    formInput: {
+      height: 40,
+      borderColor: '#ccc',
+      borderWidth: 2,
+      marginBottom: 20,
+      paddingLeft: 15,
+
+    },
+    formTextArea: {
+      height: 60
+    },
+    formTitle: {
+      textAlign: 'center',
+      fontSize: 18,
+      marginBottom: 5
+    },
+    formButton: {
+      backgroundColor: 'skyblue',
+      paddingTop: 15,
+      paddingBottom: 15
+    },
     loginContent : {
       flex : 1,
       justifyContent : 'center'
+    },
+    formTextButton: {
+      textAlign: 'center',
+      color: 'white'
     },
     loginBody : {
       paddingVertical : 30
     },
     textCenter : {
       textAlign : 'center',
-      width : '100%'
+      width : '150%',
+      color: 'white'
     },
     loginBoton : {
       marginLeft : '40%'
@@ -47,12 +80,19 @@ const styles = StyleSheet.create({
       width : 200,
       height : 150
     },
-    homeButtons : {
-      padding: 80,
-      marginTop : 100,
-      flex: 1,
-
-
+    homeButtonsContainer : {
+      padding: 0,
+      margin : 100,
+      marginTop: 470,
+      flex : 1,
+      justifyContent: 'space-between',
+    },
+    homeButton : {
+      marginTop: 20,
+      padding :20,
+      alignItems: "center",
+      backgroundColor: "#516b6c",
+      borderRadius: 15
     },
     homeBackgroundImage : {
         flex: 1,

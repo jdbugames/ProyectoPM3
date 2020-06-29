@@ -41,7 +41,7 @@ class Profile extends Component {
         <Button danger transparent bordered style={styles.buttomCenter}
         onPress={ () => {
           AsyncStorage.removeItem('userLogin')
-          this.props.navigation.navigate('Login')
+          this.props.navigation.navigate('Form')
         } }
         ><Text>Cerrar sesión</Text></Button>
       </View>

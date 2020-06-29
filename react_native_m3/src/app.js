@@ -11,6 +11,8 @@ import Push from './modules/Push/containers/push'
 import Profile from './modules/Profile/containers/profile'
 import Loading from './modules/sections/containers/loading'
 import Gallery from './modules/Home/containers/gallery'
+import Form from './modules/Forms/containers/add-form'
+import ListForm from './modules/Forms/components/list-form'
 import data from './utils/dataGlobal'
 
 //Inicio
@@ -27,6 +29,9 @@ const LoginNavigator = createStackNavigator({
   Loading,
   Register,
   Profile,
+  Form,
+  ListForm
+
   
 },{ 
   defaultNavigationOptions : { header : () => <Header text="BIENVENIDO ADMINISTRADOR"/>  }

@@ -24,9 +24,9 @@ class Gallery extends Component {
     this.setState({ data : data.results})
     console.log(data)
     /* AsyncStorage.removeItem('userLogin'); */
-    let userLogin = await AsyncStorage.getItem('userLogin')
+    /* let userLogin = await AsyncStorage.getItem('userLogin')
     userLogin = JSON.parse(userLogin)
-    this.setState({ useremail : userLogin.user, perm : userLogin.perm })
+    this.setState({ useremail : userLogin.user, perm : userLogin.perm }) */
 
     let movies = await API.getData()
     this.setState({ data : movies.data.movies, loading : false })
