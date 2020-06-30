@@ -1,57 +1,85 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Container, Content, Card, CardItem, Text, Body, Button, Item, Input } from 'native-base';
-import { KeyboardAvoidingView} from 'react-native'
+import { KeyboardAvoidingView, Alert} from 'react-native'
 import { FontAwesome, Entypo, MaterialIcons } from '@expo/vector-icons';
 import styles from '../../../utils/styles'
 import data from '../../../utils/dataGlobal'
 
-class Register extends Component {
-
-  return = () => this.props.navigation.goBack()
-
-  render() {
-    return (
-      <Container>
-            <Content padder contentContainerStyle={styles.loginContent}>
-              <KeyboardAvoidingView behavior="padding" enabled>
-                <Card>
-                  <CardItem header bordered>
-                      <Text style={styles.textCenter}>Registro de usuario</Text>
-                  </CardItem>
-                  <CardItem>
-                    <Body style={styles.loginBody}>
-                      <Item inlineLabel>
-                        <FontAwesome name='user' size={ data.sizeInputIcon } />
-                        <Input placeholder='Nombre'/>
-                      </Item>
-                      <Item inlineLabel>
-                        <FontAwesome name='user' size={ data.sizeInputIcon } />
-                        <Input placeholder='Apellido'/>
-                      </Item>
-                      <Item inlineLabel>
-                        <MaterialIcons name='email' size={ data.sizeInputIcon } />
-                        <Input placeholder='Correo electrónico'/>
-                      </Item>
-                      <Item inlineLabel>
-                        <Entypo active name='lock' size={ data.sizeInputIcon } />
-                        <Input placeholder='Contraseña'/>
-                      </Item>
-                    </Body>
-                  </CardItem>
-                  <CardItem footer bordered>
-                      <Button danger bordered onPress={this.return}>
-                        <Text>Volver</Text>
-                      </Button>
-                      <Button success bordered style={styles.loginBoton} onPress={() => this.props.navigation.navigate('Profile')} >
-                        <Text>Guardar</Text>
-                      </Button>
-                  </CardItem>
-                </Card>
-              </KeyboardAvoidingView>
-            </Content>
-      </Container>
-    );
+function Register({navigation}) {
+  const[name, setName] = useState("");
+  const[last_name, setLastName] = useState("");
+  const[email, setEmail] = useState("");
+  const[password, setPassword] = useState("");
+  const[confirm_password, setConfPassword] = useState("");
+  const registerUser = async () =>{
+    try {
+      const response = await fetch('http://localhost:4000/api/users/signup', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: name,
+          last_name: last_name,
+          email: email,
+          password: password,
+          confirm_password: confirm_password
+        })
+      });
+      const json = await response.json();
+      console.log(json);
+      Alert.alert("User Register Successfully");
+      navigation.goBack();
+    } catch (error) {
+      Alert.alert(error.message);
+    }
   }
-}
 
-export default Register
+  return (
+    <Container>
+          <Content padder contentContainerStyle={styles.loginContent}>
+            <KeyboardAvoidingView behavior="padding" enabled>
+              <Card>
+                <CardItem header bordered>
+                    <Text style={styles.textCenter}>Registro de usuario</Text>
+                </CardItem>
+                <CardItem>
+                  <Body style={styles.loginBody}>
+                    <Item inlineLabel>
+                      <FontAwesome name='user' size={ data.sizeInputIcon } />
+                      <Input onChangeText={text => setName(text)} placeholder='Nombre'/>
+                    </Item>
+                    <Item inlineLabel>
+                      <FontAwesome name='user' size={ data.sizeInputIcon } />
+                      <Input onChangeText={text => setLastName(text)} placeholder='Apellido'/>
+                    </Item>
+                    <Item inlineLabel>
+                      <MaterialIcons name='email' size={ data.sizeInputIcon } />
+                      <Input onChangeText={text => setEmail(text)} placeholder='Correo electrónico'/>
+                    </Item>
+                    <Item inlineLabel>
+                      <Entypo active name='lock' size={ data.sizeInputIcon } />
+                      <Input onChangeText={text => setPassword(text)}  placeholder='Contraseña'/>
+                    </Item>
+                    <Item inlineLabel>
+                      <Entypo active name='lock' size={ data.sizeInputIcon } />
+                      <Input onChangeText={text => setConfPassword(text)} placeholder='Confirmar Contraseña'/>
+                    </Item>
+                  </Body>
+                </CardItem>
+                <CardItem footer bordered>
+                    <Button danger bordered onPress={() => navigation.goBack()}>
+                      <Text>Volver</Text>
+                    </Button>
+                    <Button success bordered style={styles.loginBoton} onPress={registerUser}>
+                      <Text>Guardar</Text>
+                    </Button>
+                </CardItem>
+              </Card>
+            </KeyboardAvoidingView>
+          </Content>
+    </Container>
+  );
+}
+export default Register;

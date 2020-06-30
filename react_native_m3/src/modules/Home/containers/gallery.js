@@ -21,7 +21,7 @@ class Gallery extends Component {
 
   async componentDidMount(){
     let data = await API.getData()
-    this.setState({ data : data.results})
+    this.setState({ data : data.propiedades})
     console.log(data)
     /* AsyncStorage.removeItem('userLogin'); */
     /* let userLogin = await AsyncStorage.getItem('userLogin')
