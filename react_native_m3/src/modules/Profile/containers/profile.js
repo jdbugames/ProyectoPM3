@@ -17,9 +17,9 @@ class Profile extends Component {
   }
 
   async componentDidMount(){
-    /* let userLogin = await AsyncStorage.getItem('userLogin')
+    let userLogin = await AsyncStorage.getItem('userLogin')
     userLogin = JSON.parse(userLogin)
-    this.setState({ useremail : userLogin.user, perm : userLogin.perm }) */
+    this.setState({ useremail : userLogin.user, perm : userLogin.perm })
 
     let movies = await API.getData()
     this.setState({ data : movies.data.movies, loading : false })
@@ -38,7 +38,7 @@ class Profile extends Component {
             <HomeLayout datos={item} />
         }
       />
-        <CardItem footer bordered >
+         <CardItem footer bordered >
           <Button danger bordered style={styles.logoutButton} onPress={() => this.props.navigation.navigate('Login')}>
             <Text>Cerrar Sesión</Text>
           </Button>

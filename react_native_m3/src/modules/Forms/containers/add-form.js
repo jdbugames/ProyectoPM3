@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {AsyncStorage, AppRegistry,StyleSheet, Text, View, TextInput, TouchableHighlight, Alert } from 'react-native';
 import styles from '../../../utils/styles'
 import ListForm from '../components/list-form'
+import Api from '../../../utils/api'
 /* import DropDownPicker from '@react-native-dropdown-picker'; */
 
 export default class AddForm extends Component {
@@ -49,22 +50,32 @@ export default class AddForm extends Component {
       }
       arrayData.push(data);
       try {
-        AsyncStorage.getItem('as').then((value) => {
-          if(value !== null) {
-            const d = JSON.parse(value);
-            d.push(data)
-            AsyncStorage.setItem('as',JSON.stringify(d)).then(() => {
-              this.props.navigation.navigate("Profile");
-            })
+        let userId = '123';// !!!Ojo hay que obtener el id del usuario logueado 
+        Api.createPropiedad(this.state.title, this.state.type, this.state.adress,this.state.rooms,this.state.price, null, userId, function (data, err) {
+          if (err) {
+            Alert.alert(err.message);
           } else {
-            AsyncStorage.setItem('as',JSON.stringify(arrayData)).then(() => {
-              Navigation.push({
-                title: 'Add New Rent',
-                component: ListForm
-              })
+            AsyncStorage.getItem('as').then((value) => {
+              if(value !== null) {
+                const d = JSON.parse(value);
+                d.push(data)
+                AsyncStorage.setItem('as',JSON.stringify(d)).then(() => {
+                  Navigation.push({
+                    title: 'Add New Rent',
+                    component: Profile
+                  })
+                })
+              } else {
+                AsyncStorage.setItem('as',JSON.stringify(arrayData)).then(() => {
+                  Navigation.push({
+                    title: 'Add New Rent',
+                    component: Profile
+                  })
+                })
+              }
             })
           }
-        })
+        });
       } catch (error) {
         console.log(error)
       }
@@ -81,38 +92,38 @@ export default class AddForm extends Component {
           <Text style={styles.formTitle}>Ingrese Su Inmueble En Renta</Text>
           <TextInput
             style={styles.formInput}
-            placeholder="Title"
+            placeholder="Titulo de Renta"
             value={this.state.title}
             onChangeText={(title) => this.changeTitle(title)}
           />
           <TextInput 
             style={styles.formInput}
-            placeholder="Type"
+            placeholder="Typo de Inmueble"
             value={this.state.type}
             onChangeText={(type) => this.changeType(type)}
           />
           <TextInput 
             multiline={true}
             style={[styles.formInput, styles.formTextArea]}
-            placeholder="Adress"
+            placeholder="Dirección"
             value={this.state.adress}
             onChangeText={(adress) => this.changeAdress(adress)}
           />
           <TextInput 
             style={styles.formInput}
-            placeholder="Rooms"
+            placeholder="Habitaciones"
             value={this.state.rooms}
             onChangeText={(rooms) => this.changeRooms(rooms)}
           />
           <TextInput 
             style={styles.formInput}
-            placeholder="Price"
+            placeholder="Precio"
             value={this.state.price}
             onChangeText={(price) => this.changePrice(price)}
           />
           <TextInput 
             style={styles.formInput}
-            placeholder="Area"
+            placeholder="Zona"
             value={this.state.area}
             onChangeText={(area) => this.changeArea(area)}
           />
