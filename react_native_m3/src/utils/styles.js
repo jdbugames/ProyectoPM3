@@ -53,6 +53,9 @@ const styles = StyleSheet.create({
     loginBoton : {
       marginLeft : '40%'
     },
+    logoutButton : {
+      marginLeft : '10%'
+    },
     movieImageSize : {
       width: 150, 
       height: 150

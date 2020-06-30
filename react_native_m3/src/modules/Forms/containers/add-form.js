@@ -54,9 +54,7 @@ export default class AddForm extends Component {
             const d = JSON.parse(value);
             d.push(data)
             AsyncStorage.setItem('as',JSON.stringify(d)).then(() => {
-              Navigation.push({
-                asdasdad
-              })
+              this.props.navigation.navigate("Profile");
             })
           } else {
             AsyncStorage.setItem('as',JSON.stringify(arrayData)).then(() => {

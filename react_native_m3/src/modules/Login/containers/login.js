@@ -51,9 +51,9 @@ class Login extends Component {
                     </Body>
                   </CardItem>
                   <CardItem footer bordered>
-                      <Button bordered onPress={() => this.navigate('Register')}>
+                      {/* <Button bordered onPress={() => this.navigate('Register')}>
                         <Text>Registro</Text>
-                      </Button>
+                      </Button> */}
                       <Button bordered success style={styles.loginBoton} onPress={() => this.navigate('Loading')}>
                         <Text>Entrar</Text>
                       </Button>

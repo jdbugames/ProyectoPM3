@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Button, Spinner } from 'native-base'
+import { Button, Spinner, CardItem } from 'native-base'
 import {View, Text, AsyncStorage, FlatList} from 'react-native'
 import API from '../../../utils/api'
 import styles from '../../../utils/styles'
@@ -17,9 +17,9 @@ class Profile extends Component {
   }
 
   async componentDidMount(){
-    let userLogin = await AsyncStorage.getItem('userLogin')
+    /* let userLogin = await AsyncStorage.getItem('userLogin')
     userLogin = JSON.parse(userLogin)
-    this.setState({ useremail : userLogin.user, perm : userLogin.perm })
+    this.setState({ useremail : userLogin.user, perm : userLogin.perm }) */
 
     let movies = await API.getData()
     this.setState({ data : movies.data.movies, loading : false })
@@ -38,12 +38,14 @@ class Profile extends Component {
             <HomeLayout datos={item} />
         }
       />
-        <Button danger transparent bordered style={styles.buttomCenter}
-        onPress={ () => {
-          AsyncStorage.removeItem('userLogin')
-          this.props.navigation.navigate('Form')
-        } }
-        ><Text>Cerrar sesión</Text></Button>
+        <CardItem footer bordered >
+          <Button danger bordered style={styles.logoutButton} onPress={() => this.props.navigation.navigate('Login')}>
+            <Text>Cerrar Sesión</Text>
+          </Button>
+          <Button success bordered style={styles.loginBoton} onPress={() => this.props.navigation.navigate('Form')}>
+            <Text>Agregar Renta</Text>
+          </Button>
+        </CardItem>
       </View>
     )
 
